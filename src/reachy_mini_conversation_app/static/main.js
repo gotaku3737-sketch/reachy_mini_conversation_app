@@ -238,6 +238,13 @@ async function init() {
     input.classList.remove("error");
   });
 
+  input.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      saveBtn.click();
+    }
+  });
+
   saveBtn.addEventListener("click", async () => {
     const key = input.value.trim();
     if (!key) {
@@ -246,9 +253,15 @@ async function init() {
       input.classList.add("error");
       return;
     }
+
+    saveBtn.disabled = true;
+    const originalBtnText = saveBtn.textContent;
+    saveBtn.textContent = "Validating...";
+
     statusEl.textContent = "Validating API key...";
     statusEl.className = "status";
     input.classList.remove("error");
+
     try {
       // First validate the key
       const validation = await validateKey(key);
@@ -262,6 +275,7 @@ async function init() {
       // If valid, save it
       statusEl.textContent = "Key valid! Saving...";
       statusEl.className = "status ok";
+      saveBtn.textContent = "Saving...";
       await saveKey(key);
       statusEl.textContent = "Saved. Reloading…";
       statusEl.className = "status ok";
@@ -274,6 +288,9 @@ async function init() {
         statusEl.textContent = "Failed to validate/save key. Please try again.";
       }
       statusEl.className = "status error";
+    } finally {
+      saveBtn.disabled = false;
+      saveBtn.textContent = originalBtnText;
     }
   });
 
