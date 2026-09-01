@@ -1,3 +1,3 @@
-## 2024-09-01 - Missing core button focus-visible states break keyboard modals
-**Learning:** While specialized UI elements like `.app-shell__icon-btn` had proper `:focus-visible` states, the foundational `.btn` class did not. This creates a severe accessibility issue for custom dialog components like `confirm-dialog.js` that trap focus and rely on visible focus indicators for keyboard navigation.
-**Action:** Added explicit `:focus-visible` styling (`outline: 2px solid var(--accent); outline-offset: 2px;`) to `.btn` to ensure it always shows when focused via keyboard, matching the rest of the application's design system.
+## 2024-03-01 - Hide decorative emojis from screen readers
+**Learning:** Emojis used as decorative icons (like 🎤 for "Microphone" or 🤖 for "Robot") are often read aloud by screen readers with their literal unicode descriptions, which adds noise and can be very confusing when placed next to actual descriptive text.
+**Action:** Always add `aria-hidden="true"` to emojis that are purely decorative or redundant with adjacent text, especially in feature grids, lists, or headers.
