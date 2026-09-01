@@ -58,6 +58,7 @@ jobs:
           repo_type: space
           space_sdk: ${{ env.HF_SPACE_SDK }}
           private: true
+          hf_token: ${{ secrets.HF_TOKEN }}
 
       - name: Ensure preview space stays private
         if: steps.sync.outcome == 'success'
