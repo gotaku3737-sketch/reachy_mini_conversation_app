@@ -50,10 +50,11 @@ jobs:
         id: sync
         continue-on-error: true
         uses: huggingface/hub-sync@da166beda9a9aff15d1de9a82c6dc86c410ea3ee  # v0.2.1
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
         with:
           github_repo_id: ${{ github.repository }}
           huggingface_repo_id: ${{ steps.preview.outputs.space_id }}
-          hf_token: ${{ secrets.HF_TOKEN }}
           repo_type: space
           space_sdk: ${{ env.HF_SPACE_SDK }}
           private: true
