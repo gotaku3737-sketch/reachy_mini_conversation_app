@@ -1,0 +1,3 @@
+## 2024-09-01 - Missing core button focus-visible states break keyboard modals
+**Learning:** While specialized UI elements like `.app-shell__icon-btn` had proper `:focus-visible` states, the foundational `.btn` class did not. This creates a severe accessibility issue for custom dialog components like `confirm-dialog.js` that trap focus and rely on visible focus indicators for keyboard navigation.
+**Action:** Added explicit `:focus-visible` styling (`outline: 2px solid var(--accent); outline-offset: 2px;`) to `.btn` to ensure it always shows when focused via keyboard, matching the rest of the application's design system.
