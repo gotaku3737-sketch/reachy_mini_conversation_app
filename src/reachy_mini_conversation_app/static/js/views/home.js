@@ -265,6 +265,7 @@ function buildDeleteButton({ name, onDelete }) {
     type: "button",
     class: "personality-card__delete",
     "aria-label": `Delete personality ${prettifyProfileName(name)}`,
+    title: "Delete",
     onClick: onDelete,
     html: `
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -283,6 +284,7 @@ function buildEditButton({ name, onEdit }) {
     type: "button",
     class: "personality-card__edit",
     "aria-label": `Edit personality ${prettifyProfileName(name)}`,
+    title: "Edit",
     onClick: onEdit,
     html: `
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">

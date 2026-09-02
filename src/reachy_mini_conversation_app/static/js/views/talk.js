@@ -179,10 +179,12 @@ export async function mountTalkView({ outlet, signal }) {
     if (!micReady) {
       orb.root.setAttribute("aria-pressed", "false");
       orb.root.setAttribute("aria-label", "Loading microphone state");
+      orb.root.setAttribute("title", "Loading microphone state");
       return;
     }
     orb.root.setAttribute("aria-pressed", String(!muted));
     orb.root.setAttribute("aria-label", muted ? "Unmute microphone" : "Mute microphone");
+    orb.root.setAttribute("title", muted ? "Unmute microphone" : "Mute microphone");
   }
 }
 

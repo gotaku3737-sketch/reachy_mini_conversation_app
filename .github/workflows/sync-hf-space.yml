@@ -30,7 +30,7 @@ jobs:
       - name: Sync GitHub to Hugging Face Hub
         uses: huggingface/hub-sync@da166beda9a9aff15d1de9a82c6dc86c410ea3ee  # v0.2.1
         with:
-          github_repo_id: pollen-robotics/reachy_mini_conversation_app
+          github_repo_id: ${{ github.repository }}
           huggingface_repo_id: pollen-robotics/reachy_mini_conversation_app
           hf_token: ${{ secrets.HF_TOKEN }}
           repo_type: space
