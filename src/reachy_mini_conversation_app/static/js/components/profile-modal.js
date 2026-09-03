@@ -128,6 +128,7 @@ function buildDialog({ isEdit, initial }) {
       role: "dialog",
       "aria-modal": "true",
       "aria-labelledby": "custom-profile-title",
+        "aria-describedby": "custom-profile-desc",
     },
     h(
       "header",
@@ -139,7 +140,7 @@ function buildDialog({ isEdit, initial }) {
       ),
       h(
         "p",
-        { class: "modal__subtitle" },
+          { id: "custom-profile-desc", class: "modal__subtitle" },
         "Define how Reachy should behave and greet people."
       )
     ),

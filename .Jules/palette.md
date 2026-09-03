@@ -5,3 +5,6 @@
 ## 2024-09-02 - Use title attributes for discoverability on interactive icon-only elements
 **Learning:** For interactive UI elements lacking visible text labels (like the conversation orb that acts as a microphone toggle, or icon-only edit/delete buttons), standard ARIA labels help screen readers but do not provide visual feedback on hover. This leads to poor discoverability of features for sighted mouse users.
 **Action:** Always add `title` attributes on interactive icon-only elements (unless a custom tooltip component is used) to provide native hover tooltips. These `title` attributes should generally match the `aria-label` text to keep the accessible name and visual tooltip consistent.
+## 2024-05-30 - Modal accessibility: aria-describedby
+**Learning:** Dialogs (role="dialog") with a title (aria-labelledby) often contain a subtitle or message that provides crucial context for the action, especially in confirmation dialogs. Screen readers might not read this text automatically when focus moves to a button.
+**Action:** Always link the descriptive text or message using `aria-describedby` on the dialog container to ensure screen readers announce the full context.

@@ -30,9 +30,10 @@ export function confirmDialog({
       "div",
       { class: "modal modal--confirm", role: "dialog", "aria-modal": "true", "aria-labelledby": "confirm-title" },
       h("h2", { id: "confirm-title", class: "modal__title" }, title),
-      message ? h("p", { class: "modal__subtitle" }, message) : null,
+      message ? h("p", { id: "confirm-message", class: "modal__subtitle" }, message) : null,
       h("div", { class: "modal__actions" }, cancelBtn, confirmBtn)
     );
+    if (message) dialog.setAttribute("aria-describedby", "confirm-message");
     overlay.appendChild(dialog);
     document.body.appendChild(overlay);
 
