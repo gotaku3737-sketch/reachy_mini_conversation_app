@@ -130,6 +130,7 @@ function boot() {
       const onSettings = routeName === ROUTES.SETTINGS;
       gear.classList.toggle("is-active", onSettings);
       gear.setAttribute("aria-label", onSettings ? "Close settings" : "Open settings");
+      gear.setAttribute("aria-expanded", String(onSettings));
     }
     if (back) {
       back.hidden = routeName === ROUTES.TALK;

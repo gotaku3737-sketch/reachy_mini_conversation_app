@@ -25,7 +25,7 @@ export function buildProfileToolsSection({ signal, initialProfile = null, onProf
   const status = h("p", { class: "settings-status", role: "status", "aria-live": "polite" });
   const resetButton = h(
     "button",
-    { type: "button", class: "btn btn--ghost", disabled: "disabled" },
+    { type: "button", class: "btn btn--ghost", disabled: "disabled", "aria-haspopup": "dialog" },
     "Restore defaults"
   );
   const saveButton = h(

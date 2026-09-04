@@ -265,6 +265,7 @@ function buildDeleteButton({ name, onDelete }) {
     type: "button",
     class: "personality-card__delete",
     "aria-label": `Delete personality ${prettifyProfileName(name)}`,
+    "aria-haspopup": "dialog",
     title: "Delete",
     onClick: onDelete,
     html: `
@@ -284,6 +285,7 @@ function buildEditButton({ name, onEdit }) {
     type: "button",
     class: "personality-card__edit",
     "aria-label": `Edit personality ${prettifyProfileName(name)}`,
+    "aria-haspopup": "dialog",
     title: "Edit",
     onClick: onEdit,
     html: `
@@ -310,6 +312,7 @@ function buildCustomCard({ onClick }) {
       type: "button",
       class: "personality-card personality-card--custom",
       "aria-label": "Create a custom personality",
+      "aria-haspopup": "dialog",
       onClick,
     },
     h("span", { class: "personality-card__plus", "aria-hidden": "true" }, "+"),
