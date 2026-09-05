@@ -128,6 +128,7 @@ function buildToolSpacesSection({ signal, onBeforeChange, onChanged } = {}) {
           type: "button",
           class: "btn btn--ghost",
           "aria-label": `Remove Tool Space ${space.slug}`,
+          "aria-haspopup": "dialog",
           disabled: busy || !editable ? "disabled" : null,
         },
         "Remove"
