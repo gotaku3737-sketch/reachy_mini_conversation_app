@@ -150,7 +150,7 @@ function buildDialog({ isEdit, initial }) {
       h(
         "label",
         { class: "modal__field" },
-        h("span", { class: "modal__label" }, "Name"),
+        h("span", { class: "modal__label" }, "Name", !isEdit ? h("span", { "aria-hidden": "true", style: { color: "var(--danger)", marginLeft: "4px" } }, "*") : null),
         h("input", {
           type: "text",
           name: "name",
@@ -162,12 +162,13 @@ function buildDialog({ isEdit, initial }) {
           pattern: "[a-zA-Z0-9_-]+",
           value: isEdit ? initial.name || "" : null,
           class: ["modal__input", isEdit && "is-readonly"],
-        })
+        }),
+        !isEdit ? h("p", { class: "muted small", style: { margin: "2px 0 0" } }, "Only letters, numbers, dashes, and underscores.") : null
       ),
       h(
         "label",
         { class: "modal__field" },
-        h("span", { class: "modal__label" }, "Instructions"),
+        h("span", { class: "modal__label" }, "Instructions", h("span", { "aria-hidden": "true", style: { color: "var(--danger)", marginLeft: "4px" } }, "*")),
         h(
           "textarea",
           {
