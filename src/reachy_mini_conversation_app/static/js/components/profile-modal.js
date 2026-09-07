@@ -162,8 +162,9 @@ function buildDialog({ isEdit, initial }) {
           pattern: "[a-zA-Z0-9_-]+",
           value: isEdit ? initial.name || "" : null,
           class: ["modal__input", isEdit && "is-readonly"],
+          "aria-describedby": !isEdit ? "name-constraint" : null,
         }),
-        !isEdit ? h("p", { class: "muted small", style: { margin: "2px 0 0" } }, "Only letters, numbers, dashes, and underscores.") : null
+        !isEdit ? h("p", { id: "name-constraint", class: "muted small", style: { margin: "2px 0 0" } }, "Only letters, numbers, dashes, and underscores.") : null
       ),
       h(
         "label",

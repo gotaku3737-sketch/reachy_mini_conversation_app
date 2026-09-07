@@ -59,7 +59,7 @@ export async function mountSettingsView({ outlet, signal }) {
 function buildConnectionSection({ onSaved } = {}) {
   const hfModeSelect = h(
     "select",
-    { class: "settings-select", name: "hf_mode" },
+    { class: "settings-select", name: "hf_mode", "aria-describedby": "hf-mode-hint" },
     h("option", { value: HF_CONNECTION_MODES.DEPLOYED }, "Hosted"),
     h("option", { value: HF_CONNECTION_MODES.LOCAL }, "Local")
   );
@@ -97,7 +97,7 @@ function buildConnectionSection({ onSaved } = {}) {
       hfPortInput
     )
   );
-  const hint = h("p", { class: "settings-hint" }, "");
+  const hint = h("p", { id: "hf-mode-hint", class: "settings-hint" }, "");
   const status = h("p", { class: "settings-status", role: "status", "aria-live": "polite" });
   const submitButton = h("button", { type: "submit", class: "btn btn--primary" }, "Save connection");
 

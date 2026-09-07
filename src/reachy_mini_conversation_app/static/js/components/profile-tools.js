@@ -15,6 +15,7 @@ export function buildProfileToolsSection({ signal, initialProfile = null, onProf
     name: "profile_tools_profile",
     disabled: "disabled",
     "aria-label": "Personality to configure",
+    "aria-describedby": "profile-tools-intro",
   });
   const summary = h("div", { class: "settings-toolset-summary", "aria-live": "polite" });
   const toolGroups = h(
@@ -39,7 +40,7 @@ export function buildProfileToolsSection({ signal, initialProfile = null, onProf
     h("h2", { class: "settings-section-title" }, "Tool access"),
     h(
       "p",
-      { class: "settings-hint settings-section-intro" },
+      { id: "profile-tools-intro", class: "settings-hint settings-section-intro" },
       "Choose exactly what each personality can use. Installed Tool Spaces stay off until selected."
     ),
     h(
