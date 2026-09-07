@@ -64,6 +64,7 @@ function buildToolSpacesSection({ signal, onBeforeChange, onChanged } = {}) {
     enterkeyhint: "go",
     placeholder: "owner/space-name",
     class: "settings-input",
+    "aria-describedby": "tool-space-hint",
   });
   const addButton = h("button", { type: "submit", class: "btn btn--primary" }, "Add Space");
   const status = h("p", { class: "settings-status", role: "status", "aria-live": "polite" });
@@ -79,7 +80,7 @@ function buildToolSpacesSection({ signal, onBeforeChange, onChanged } = {}) {
     h("div", { class: "settings-tool-space-controls" }, slugInput, addButton),
     h(
       "p",
-      { class: "settings-hint" },
+      { id: "tool-space-hint", class: "settings-hint" },
       "Install an MCP-compatible Hugging Face Space, then choose access per personality above."
     ),
     status

@@ -8,3 +8,7 @@
 ## 2024-05-30 - Modal accessibility: aria-describedby
 **Learning:** Dialogs (role="dialog") with a title (aria-labelledby) often contain a subtitle or message that provides crucial context for the action, especially in confirmation dialogs. Screen readers might not read this text automatically when focus moves to a button.
 **Action:** Always link the descriptive text or message using `aria-describedby` on the dialog container to ensure screen readers announce the full context.
+## 2024-11-20 - Explicitly linking helper text
+
+**Learning:** When helper text or form constraint hints are separated from the main form labels, they must be explicitly associated with the input fields using the `aria-describedby` attribute so that screen readers correctly provide this context to users.
+**Action:** Always ensure that hint and helper paragraphs in the UI are given a unique ID and are referenced by `aria-describedby` on their corresponding input or select fields.
