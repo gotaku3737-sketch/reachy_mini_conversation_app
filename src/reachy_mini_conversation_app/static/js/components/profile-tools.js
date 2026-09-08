@@ -308,6 +308,7 @@ function toolChoice(tool, checked) {
     type: "checkbox",
     value: tool.id,
     checked: checked ? "checked" : null,
+    "aria-label": `Enable tool: ${prettifyToolName(tool.id)}`,
   });
   return h(
     "label",
