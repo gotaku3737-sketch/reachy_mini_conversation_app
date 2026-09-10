@@ -212,6 +212,7 @@ function buildPersonalityCard({ name, isActive, disabled, onSelect, onManageTool
       type: "button",
       class: ["personality-card", isActive && "is-active", disabled && "is-disabled"],
       disabled: disabled ? "disabled" : null,
+      title: disabled ? "Personality is locked and cannot be changed right now." : null,
       "aria-pressed": isActive ? "true" : "false",
       "aria-label": `Use personality ${prettifyProfileName(name)}`,
       onClick: disabled ? undefined : onSelect,
