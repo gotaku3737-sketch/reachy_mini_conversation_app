@@ -304,11 +304,13 @@ export function buildProfileToolsSection({ signal, initialProfile = null, onProf
 
 function toolChoice(tool, checked) {
   const unavailable = tool.kind === "unavailable";
+  const descId = tool.description ? `desc-${tool.id.replace(/[^a-zA-Z0-9-]/g, "-")}` : null;
   const input = h("input", {
     type: "checkbox",
     value: tool.id,
     checked: checked ? "checked" : null,
     "aria-label": `Enable tool: ${prettifyToolName(tool.id)}`,
+    "aria-describedby": descId,
   });
   return h(
     "label",
@@ -321,7 +323,7 @@ function toolChoice(tool, checked) {
       { class: "settings-tool-choice-copy" },
       h("strong", { class: "settings-tool-choice-name" }, prettifyToolName(tool.id)),
       tool.kind === "unavailable" ? h("code", { class: "settings-tool-choice-id" }, tool.id) : null,
-      tool.description ? h("span", { class: "settings-tool-choice-description" }, tool.description) : null
+      tool.description ? h("span", { id: descId, class: "settings-tool-choice-description" }, tool.description) : null
     )
   );
 }

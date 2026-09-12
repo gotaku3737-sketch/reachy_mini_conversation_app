@@ -1,14 +1,3 @@
-## 2024-03-01 - Hide decorative emojis from screen readers
-**Learning:** Emojis used as decorative icons (like 🎤 for "Microphone" or 🤖 for "Robot") are often read aloud by screen readers with their literal unicode descriptions, which adds noise and can be very confusing when placed next to actual descriptive text.
-**Action:** Always add `aria-hidden="true"` to emojis that are purely decorative or redundant with adjacent text, especially in feature grids, lists, or headers.
-
-## 2024-09-02 - Use title attributes for discoverability on interactive icon-only elements
-**Learning:** For interactive UI elements lacking visible text labels (like the conversation orb that acts as a microphone toggle, or icon-only edit/delete buttons), standard ARIA labels help screen readers but do not provide visual feedback on hover. This leads to poor discoverability of features for sighted mouse users.
-**Action:** Always add `title` attributes on interactive icon-only elements (unless a custom tooltip component is used) to provide native hover tooltips. These `title` attributes should generally match the `aria-label` text to keep the accessible name and visual tooltip consistent.
-## 2024-05-30 - Modal accessibility: aria-describedby
-**Learning:** Dialogs (role="dialog") with a title (aria-labelledby) often contain a subtitle or message that provides crucial context for the action, especially in confirmation dialogs. Screen readers might not read this text automatically when focus moves to a button.
-**Action:** Always link the descriptive text or message using `aria-describedby` on the dialog container to ensure screen readers announce the full context.
-## 2024-11-20 - Explicitly linking helper text
-
-**Learning:** When helper text or form constraint hints are separated from the main form labels, they must be explicitly associated with the input fields using the `aria-describedby` attribute so that screen readers correctly provide this context to users.
-**Action:** Always ensure that hint and helper paragraphs in the UI are given a unique ID and are referenced by `aria-describedby` on their corresponding input or select fields.
+## 2024-05-25 - [Aria-describedby pattern for inputs with descriptions]
+**Learning:** Tool descriptions presented alongside checkboxes were visually associated but programmatically separated. Adding an `id` to the description and `aria-describedby` to the input ensures screen readers provide full context during keyboard navigation.
+**Action:** When adding helper text or descriptions to form inputs, always generate a unique ID and link it using `aria-describedby`.
