@@ -89,7 +89,20 @@ export function openProfileModal({ mode = "create", initial = {}, signal } = {})
 
     const errorBox = dialog.querySelector(".modal__error");
     dialog.querySelectorAll("input, textarea").forEach((field) => {
-      field.addEventListener("input", () => errorBox.classList.remove("is-visible"));
+      field.addEventListener("input", () => {
+        errorBox.classList.remove("is-visible");
+        field.removeAttribute("aria-invalid");
+        // Remove the error box from aria-describedby
+        const currentDescribedBy = field.getAttribute("aria-describedby");
+        if (currentDescribedBy) {
+          const newDescribedBy = currentDescribedBy.replace("modal-error-box", "").trim();
+          if (newDescribedBy) {
+            field.setAttribute("aria-describedby", newDescribedBy);
+          } else {
+            field.removeAttribute("aria-describedby");
+          }
+        }
+      });
     });
 
     dialog.querySelector("form").addEventListener("submit", (event) => {
@@ -101,12 +114,12 @@ export function openProfileModal({ mode = "create", initial = {}, signal } = {})
       const greeting = String(formData.get("greeting") || "").trim();
 
       if (!isEdit) {
-        if (!name) return showError(errorBox, "Please pick a name.");
+        if (!name) return showError(errorBox, dialog.querySelector("input[name='name']"), "Please pick a name.");
         if (!NAME_PATTERN.test(name)) {
-          return showError(errorBox, "Use only letters, numbers, dashes or underscores.");
+          return showError(errorBox, dialog.querySelector("input[name='name']"), "Use only letters, numbers, dashes or underscores.");
         }
       }
-      if (!instructions) return showError(errorBox, "Please write some instructions.");
+      if (!instructions) return showError(errorBox, dialog.querySelector("textarea[name='instructions']"), "Please write some instructions.");
 
       close({ name, instructions, greeting });
     });
@@ -198,7 +211,7 @@ function buildDialog({ isEdit, initial }) {
           initial.greeting || ""
         )
       ),
-      h("p", { class: "modal__error", role: "alert", "aria-live": "polite" }),
+      h("p", { id: "modal-error-box", class: "modal__error", role: "alert", "aria-live": "polite" }),
       h(
         "div",
         { class: "modal__actions" },
@@ -209,7 +222,16 @@ function buildDialog({ isEdit, initial }) {
   );
 }
 
-function showError(errorBox, message) {
+function showError(errorBox, field, message) {
   errorBox.textContent = message;
   errorBox.classList.add("is-visible");
+  if (field) {
+    field.setAttribute("aria-invalid", "true");
+    const currentDescribedBy = field.getAttribute("aria-describedby");
+    if (!currentDescribedBy) {
+      field.setAttribute("aria-describedby", "modal-error-box");
+    } else if (!currentDescribedBy.includes("modal-error-box")) {
+      field.setAttribute("aria-describedby", `${currentDescribedBy} modal-error-box`);
+    }
+  }
 }
