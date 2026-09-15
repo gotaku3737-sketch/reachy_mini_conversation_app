@@ -67,7 +67,13 @@ function buildToolSpacesSection({ signal, onBeforeChange, onChanged } = {}) {
     "aria-describedby": "tool-space-hint",
   });
   const addButton = h("button", { type: "submit", class: "btn btn--primary" }, "Add Space");
-  const status = h("p", { class: "settings-status", role: "status", "aria-live": "polite" });
+
+  slugInput.addEventListener("input", () => {
+    slugInput.removeAttribute("aria-invalid");
+    slugInput.setAttribute("aria-describedby", "tool-space-hint");
+  });
+
+  const status = h("p", { id: "tool-space-status", class: "settings-status", role: "status", "aria-live": "polite" });
   const list = h(
     "div",
     { class: "settings-tool-spaces", role: "list", "aria-live": "polite" },
@@ -201,6 +207,8 @@ function buildToolSpacesSection({ signal, onBeforeChange, onChanged } = {}) {
       if (signal?.aborted) return;
       status.textContent = `Failed to add: ${describeError(error)}`;
       status.classList.add("is-error");
+      slugInput.setAttribute("aria-invalid", "true");
+      slugInput.setAttribute("aria-describedby", "tool-space-hint tool-space-status");
     } finally {
       if (!signal?.aborted) setBusy(false);
     }
