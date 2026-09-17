@@ -130,6 +130,7 @@ function boot() {
       const onSettings = routeName === ROUTES.SETTINGS;
       gear.classList.toggle("is-active", onSettings);
       gear.setAttribute("aria-label", onSettings ? "Close settings" : "Open settings");
+      gear.setAttribute("title", onSettings ? "Close settings" : "Open settings");
       gear.setAttribute("aria-expanded", String(onSettings));
     }
     if (back) {
@@ -146,6 +147,7 @@ function boot() {
         backLabel = "Back to personalities";
       }
       back.setAttribute("aria-label", backLabel);
+      back.setAttribute("title", backLabel);
     }
     if (routeName === ROUTES.TALK) showPersonalityBadge();
     else hidePersonalityBadge();
