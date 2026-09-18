@@ -82,8 +82,22 @@ export function buildProfileToolsSection({ signal, initialProfile = null, onProf
       checkbox.disabled = disabled;
       checkbox.closest(".settings-tool-choice")?.classList.toggle("is-disabled", disabled);
     });
+
     resetButton.disabled = busy || !editable || !currentPayload?.overridden;
+    if (resetButton.disabled) {
+      const reason = !editable ? "Tool editing is locked by the administrator" : "Profile is already using default tools";
+      resetButton.setAttribute("title", busy ? "Loading…" : reason);
+    } else {
+      resetButton.removeAttribute("title");
+    }
+
     saveButton.disabled = busy || !editable || !dirty;
+    if (saveButton.disabled) {
+      const reason = !editable ? "Tool editing is locked by the administrator" : "No changes to save";
+      saveButton.setAttribute("title", busy ? "Loading…" : reason);
+    } else {
+      saveButton.removeAttribute("title");
+    }
   }
 
   function setBusy(nextBusy) {
