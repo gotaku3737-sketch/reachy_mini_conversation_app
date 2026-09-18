@@ -109,8 +109,18 @@ function buildToolSpacesSection({ signal, onBeforeChange, onChanged } = {}) {
     slugInput.disabled = nextBusy || !editable;
     addButton.disabled = nextBusy || !editable;
     addButton.textContent = nextBusy ? addLabel : "Add Space";
+    const reason = nextBusy ? "Loading…" : (!editable ? "Tool Space editing is locked by the administrator" : null);
+    if (reason) {
+      slugInput.setAttribute("title", reason);
+      addButton.setAttribute("title", reason);
+    } else {
+      slugInput.removeAttribute("title");
+      addButton.removeAttribute("title");
+    }
     list.querySelectorAll("button").forEach((button) => {
       button.disabled = nextBusy || !editable;
+      if (reason) button.setAttribute("title", reason);
+      else button.removeAttribute("title");
     });
   }
 
@@ -137,6 +147,7 @@ function buildToolSpacesSection({ signal, onBeforeChange, onChanged } = {}) {
           "aria-label": `Remove Tool Space ${space.slug}`,
           "aria-haspopup": "dialog",
           disabled: busy || !editable ? "disabled" : null,
+          title: busy ? "Loading…" : (!editable ? "Tool Space editing is locked by the administrator" : null),
         },
         "Remove"
       );

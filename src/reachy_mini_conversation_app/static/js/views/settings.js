@@ -130,6 +130,13 @@ function buildConnectionSection({ onSaved } = {}) {
     hfPortInput.disabled = !isLocal;
     hfHostInput.required = isLocal;
     hfPortInput.required = isLocal;
+    if (!isLocal) {
+      hfHostInput.setAttribute("title", "Only applicable in Local mode");
+      hfPortInput.setAttribute("title", "Only applicable in Local mode");
+    } else {
+      hfHostInput.removeAttribute("title");
+      hfPortInput.removeAttribute("title");
+    }
     hint.textContent = HF_MODE_HINTS[hfModeSelect.value] || "";
   }
 
@@ -142,6 +149,10 @@ function buildConnectionSection({ onSaved } = {}) {
     hfModeSelect.disabled = true;
     hfHostInput.disabled = true;
     hfPortInput.disabled = true;
+    submitButton.setAttribute("title", "Saving…");
+    hfModeSelect.setAttribute("title", "Saving…");
+    hfHostInput.setAttribute("title", "Saving…");
+    hfPortInput.setAttribute("title", "Saving…");
     form.setAttribute("aria-busy", "true");
     status.classList.remove("is-error");
     status.textContent = "Saving…";
@@ -163,6 +174,8 @@ function buildConnectionSection({ onSaved } = {}) {
     } finally {
       submitButton.disabled = false;
       hfModeSelect.disabled = false;
+      submitButton.removeAttribute("title");
+      hfModeSelect.removeAttribute("title");
       syncLocalFields();
       form.removeAttribute("aria-busy");
     }
@@ -219,6 +232,8 @@ function buildVoiceSection() {
     if (submitButton.disabled || !select.value) return;
     submitButton.disabled = true;
     select.disabled = true;
+    submitButton.setAttribute("title", "Applying…");
+    select.setAttribute("title", "Applying…");
     form.setAttribute("aria-busy", "true");
     status.classList.remove("is-error");
     status.textContent = "Applying…";
@@ -231,6 +246,12 @@ function buildVoiceSection() {
     } finally {
       submitButton.disabled = !select.value;
       select.disabled = !select.value;
+      if (!select.value) {
+        submitButton.setAttribute("title", "No voice selected");
+      } else {
+        submitButton.removeAttribute("title");
+      }
+      select.removeAttribute("title");
       form.removeAttribute("aria-busy");
     }
   });
@@ -243,8 +264,13 @@ function buildVoiceSection() {
         select.appendChild(h("option", { value: "" }, "No voices available"));
         select.disabled = true;
         submitButton.disabled = true;
+        select.setAttribute("title", "Voices are unavailable right now");
+        submitButton.setAttribute("title", "Voices are unavailable right now");
         status.textContent = "Voices are unavailable right now.";
         return;
+      } else {
+        select.removeAttribute("title");
+        submitButton.removeAttribute("title");
       }
       for (const v of voices) {
         const opt = h("option", { value: v }, v);
