@@ -267,7 +267,7 @@ function buildDeleteButton({ name, onDelete }) {
     class: "personality-card__delete",
     "aria-label": `Delete personality ${prettifyProfileName(name)}`,
     "aria-haspopup": "dialog",
-    title: "Delete",
+    title: `Delete personality ${prettifyProfileName(name)}`,
     onClick: onDelete,
     html: `
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -287,7 +287,7 @@ function buildEditButton({ name, onEdit }) {
     class: "personality-card__edit",
     "aria-label": `Edit personality ${prettifyProfileName(name)}`,
     "aria-haspopup": "dialog",
-    title: "Edit",
+    title: `Edit personality ${prettifyProfileName(name)}`,
     onClick: onEdit,
     html: `
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
