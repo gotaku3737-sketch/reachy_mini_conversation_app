@@ -160,6 +160,7 @@ export async function mountTalkView({ outlet, signal }) {
   async function onSetDefault() {
     if (!defaultAction || !activePersonality) return;
     defaultAction.disabled = true;
+    defaultAction.setAttribute("title", "Saving default personality…");
     caption.textContent = `Saving "${prettifyProfileName(activePersonality)}" as default...`;
     try {
       await applyPersonality(activePersonality, { persist: true });
@@ -172,6 +173,7 @@ export async function mountTalkView({ outlet, signal }) {
       }
     } finally {
       defaultAction.disabled = false;
+      defaultAction.removeAttribute("title");
     }
   }
 

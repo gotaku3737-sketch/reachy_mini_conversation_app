@@ -1,3 +1,6 @@
 ## 2024-05-24 - Contextual Disabled States via `title` Attribute
 **Learning:** Adding a `title` attribute to explicitly describe *why* an element is disabled (e.g. "Only applicable in Local mode", "Loading…", "Tool Space editing is locked") improves UX and accessibility for users who might otherwise be confused why they can't interact with a specific UI component.
 **Action:** When a UI component switches into a disabled state dynamically or due to specific configurations, dynamically update a `title` attribute on that element to provide context to the user. Ensure to remove the title when the element is re-enabled to prevent misleading tooltips.
+## 2024-05-24 - Dynamic Disabled Tooltips
+**Learning:** Hardcoding a disabled `title` (e.g., `title: "Loading..."`) on elements that are rendered initially disabled but later activated dynamically leaves lingering, incorrect tooltips if not explicitly removed. The UX is degraded when an active button still claims it is disabled.
+**Action:** When adding `title` attributes to explain disabled states, always ensure that the state-synchronization logic (e.g., `syncActions`) explicitly calls `.removeAttribute("title")` when the element becomes enabled.

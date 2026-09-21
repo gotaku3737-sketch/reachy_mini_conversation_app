@@ -203,13 +203,13 @@ function buildConnectionSection({ onSaved } = {}) {
 function buildVoiceSection() {
   const select = h(
     "select",
-    { class: "settings-select", name: "voice", disabled: "disabled" },
+    { class: "settings-select", name: "voice", disabled: "disabled", title: "Loading voices…" },
     h("option", { value: "" }, "Loading voices…")
   );
   const status = h("p", { class: "settings-status", role: "status", "aria-live": "polite" });
   const submitButton = h(
     "button",
-    { type: "submit", class: "btn btn--primary", disabled: "disabled" },
+    { type: "submit", class: "btn btn--primary", disabled: "disabled", title: "Loading voices…" },
     "Apply voice"
   );
   const form = h(
@@ -279,6 +279,8 @@ function buildVoiceSection() {
       }
       select.disabled = false;
       submitButton.disabled = false;
+      select.removeAttribute("title");
+      submitButton.removeAttribute("title");
       status.textContent = "";
     },
   };
