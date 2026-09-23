@@ -78,10 +78,23 @@ export function buildProfileToolsSection({ signal, initialProfile = null, onProf
   function syncActions() {
     const editable = currentPayload?.editable !== false;
     profileSelect.disabled = busy || !currentPayload?.profiles?.length;
-    if (!profileSelect.disabled) profileSelect.removeAttribute("title");
+
+    const disabledReason = busy ? "Loading…" : (!editable ? "Tool editing is locked by the administrator" : null);
+
+    if (profileSelect.disabled) {
+      profileSelect.setAttribute("title", disabledReason || "No profiles available");
+    } else {
+      profileSelect.removeAttribute("title");
+    }
+
     toolGroups.querySelectorAll('input[type="checkbox"]').forEach((checkbox) => {
       const disabled = busy || !editable;
       checkbox.disabled = disabled;
+      if (disabled) {
+        checkbox.setAttribute("title", disabledReason);
+      } else {
+        checkbox.removeAttribute("title");
+      }
       checkbox.closest(".settings-tool-choice")?.classList.toggle("is-disabled", disabled);
     });
 
