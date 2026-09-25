@@ -209,7 +209,7 @@ function buildVoiceSection() {
   const status = h("p", { class: "settings-status", role: "status", "aria-live": "polite" });
   const submitButton = h(
     "button",
-    { type: "submit", class: "btn btn--primary", disabled: "disabled" },
+    { type: "submit", class: "btn btn--primary", disabled: "disabled", title: "Loading voices…" },
     "Apply voice"
   );
   const form = h(
