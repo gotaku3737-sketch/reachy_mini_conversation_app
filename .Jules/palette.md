@@ -1,3 +1,6 @@
 ## 2024-05-24 - Contextual Disabled States via `title` Attribute
 **Learning:** Adding a `title` attribute to explicitly describe *why* an element is disabled (e.g. "Only applicable in Local mode", "Loading…", "Tool Space editing is locked") improves UX and accessibility for users who might otherwise be confused why they can't interact with a specific UI component.
 **Action:** When a UI component switches into a disabled state dynamically or due to specific configurations, dynamically update a `title` attribute on that element to provide context to the user. Ensure to remove the title when the element is re-enabled to prevent misleading tooltips.
+## 2026-09-26 - Dynamic aria-labels for State-Bearing Buttons
+**Learning:** Using a static `aria-label` on a button whose inner text changes dynamically (e.g., to show a selected profile or state) completely hides the dynamic text from screen readers, as the `aria-label` overrides the element's entire content.
+**Action:** When a button acts as both an action trigger and a state display, dynamically update its `aria-label` via JavaScript whenever the state changes so that screen reader users hear both the action and the current state (e.g., `Change personality. Current: Zen Master`).
