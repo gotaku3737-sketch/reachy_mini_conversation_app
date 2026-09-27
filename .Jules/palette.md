@@ -4,3 +4,6 @@
 ## 2026-09-26 - Dynamic aria-labels for State-Bearing Buttons
 **Learning:** Using a static `aria-label` on a button whose inner text changes dynamically (e.g., to show a selected profile or state) completely hides the dynamic text from screen readers, as the `aria-label` overrides the element's entire content.
 **Action:** When a button acts as both an action trigger and a state display, dynamically update its `aria-label` via JavaScript whenever the state changes so that screen reader users hear both the action and the current state (e.g., `Change personality. Current: Zen Master`).
+## 2026-09-27 - Inline Validation Context via aria-invalid and aria-describedby
+**Learning:** Adding a generic status message below a form fails to give screen reader users context about which specific fields were rejected by backend validation.
+**Action:** Always dynamically toggle `aria-invalid="true"` on the offending input fields upon submission failure, and append the error message's ID to the field's `aria-describedby` attribute (e.g. `aria-describedby="hint-id error-id"`). Crucially, bind `input` and `change` event listeners to immediately clean up `aria-invalid`, `aria-describedby`, and the error text as soon as the user starts correcting the fields.

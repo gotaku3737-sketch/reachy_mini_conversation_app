@@ -98,8 +98,24 @@ function buildConnectionSection({ onSaved } = {}) {
     )
   );
   const hint = h("p", { id: "hf-mode-hint", class: "settings-hint" }, "");
-  const status = h("p", { class: "settings-status", role: "status", "aria-live": "polite" });
+  const status = h("p", { id: "connection-status", class: "settings-status", role: "status", "aria-live": "polite" });
   const submitButton = h("button", { type: "submit", class: "btn btn--primary" }, "Save connection");
+
+  function clearError() {
+    hfHostInput.removeAttribute("aria-invalid");
+    hfPortInput.removeAttribute("aria-invalid");
+    hfModeSelect.removeAttribute("aria-invalid");
+    hfHostInput.removeAttribute("aria-describedby");
+    hfPortInput.removeAttribute("aria-describedby");
+    hfModeSelect.setAttribute("aria-describedby", "hf-mode-hint");
+    if (status.classList.contains("is-error")) {
+      status.classList.remove("is-error");
+      status.textContent = "";
+    }
+  }
+
+  hfHostInput.addEventListener("input", clearError);
+  hfPortInput.addEventListener("input", clearError);
 
   const form = h(
     "form",
@@ -140,7 +156,10 @@ function buildConnectionSection({ onSaved } = {}) {
     hint.textContent = HF_MODE_HINTS[hfModeSelect.value] || "";
   }
 
-  hfModeSelect.addEventListener("change", syncLocalFields);
+  hfModeSelect.addEventListener("change", () => {
+    clearError();
+    syncLocalFields();
+  });
 
   form.addEventListener("submit", async (event) => {
     event.preventDefault();
@@ -171,6 +190,12 @@ function buildConnectionSection({ onSaved } = {}) {
     } catch (error) {
       status.textContent = `Failed to save: ${describeError(error)}`;
       status.classList.add("is-error");
+      hfHostInput.setAttribute("aria-invalid", "true");
+      hfPortInput.setAttribute("aria-invalid", "true");
+      hfModeSelect.setAttribute("aria-invalid", "true");
+      hfHostInput.setAttribute("aria-describedby", "connection-status");
+      hfPortInput.setAttribute("aria-describedby", "connection-status");
+      hfModeSelect.setAttribute("aria-describedby", "hf-mode-hint connection-status");
     } finally {
       submitButton.disabled = false;
       hfModeSelect.disabled = false;
@@ -206,7 +231,17 @@ function buildVoiceSection() {
     { class: "settings-select", name: "voice", disabled: "disabled" },
     h("option", { value: "" }, "Loading voices…")
   );
-  const status = h("p", { class: "settings-status", role: "status", "aria-live": "polite" });
+  const status = h("p", { id: "voice-status", class: "settings-status", role: "status", "aria-live": "polite" });
+
+  select.addEventListener("change", () => {
+    select.removeAttribute("aria-invalid");
+    select.removeAttribute("aria-describedby");
+    if (status.classList.contains("is-error")) {
+      status.classList.remove("is-error");
+      status.textContent = "";
+    }
+  });
+
   const submitButton = h(
     "button",
     { type: "submit", class: "btn btn--primary", disabled: "disabled" },
@@ -243,6 +278,8 @@ function buildVoiceSection() {
     } catch (error) {
       status.textContent = `Failed to apply: ${describeError(error)}`;
       status.classList.add("is-error");
+      select.setAttribute("aria-invalid", "true");
+      select.setAttribute("aria-describedby", "voice-status");
     } finally {
       submitButton.disabled = !select.value;
       select.disabled = !select.value;
