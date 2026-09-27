@@ -1,7 +1,9 @@
 ## 2024-05-24 - Contextual Disabled States via `title` Attribute
 **Learning:** Adding a `title` attribute to explicitly describe *why* an element is disabled (e.g. "Only applicable in Local mode", "Loading…", "Tool Space editing is locked") improves UX and accessibility for users who might otherwise be confused why they can't interact with a specific UI component.
 **Action:** When a UI component switches into a disabled state dynamically or due to specific configurations, dynamically update a `title` attribute on that element to provide context to the user. Ensure to remove the title when the element is re-enabled to prevent misleading tooltips.
-
-## 2024-05-18 - Missing Tooltip on Async Disable
-**Learning:** During initial UI rendering of settings views, buttons tied to async data fetches (like voice lists) are often initialized in a disabled state but without a tooltip explaining why (e.g., "Loading voices..."). This creates an unhelpful "dead UI" moment before the async operation resolves or errors out.
-**Action:** Always explicitly add a `title` explaining the loading/waiting state to buttons that are initialized as `disabled` pending an async operation, and ensure the code that enables them removes the title (which the codebase already correctly does).
+## 2026-09-26 - Dynamic aria-labels for State-Bearing Buttons
+**Learning:** Using a static `aria-label` on a button whose inner text changes dynamically (e.g., to show a selected profile or state) completely hides the dynamic text from screen readers, as the `aria-label` overrides the element's entire content.
+**Action:** When a button acts as both an action trigger and a state display, dynamically update its `aria-label` via JavaScript whenever the state changes so that screen reader users hear both the action and the current state (e.g., `Change personality. Current: Zen Master`).
+## 2026-09-27 - Inline Validation Context via aria-invalid and aria-describedby
+**Learning:** Adding a generic status message below a form fails to give screen reader users context about which specific fields were rejected by backend validation.
+**Action:** Always dynamically toggle `aria-invalid="true"` on the offending input fields upon submission failure, and append the error message's ID to the field's `aria-describedby` attribute (e.g. `aria-describedby="hint-id error-id"`). Crucially, bind `input` and `change` event listeners to immediately clean up `aria-invalid`, `aria-describedby`, and the error text as soon as the user starts correcting the fields.

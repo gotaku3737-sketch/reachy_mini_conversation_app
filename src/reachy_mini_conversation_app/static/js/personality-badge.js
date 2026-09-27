@@ -26,8 +26,10 @@ export function setPersonality(rawName) {
   if (!rootEl || !nameEl || !avatarImg) return;
   if (!rawName) return;
   const cleanName = String(rawName).replace(/^user_personalities\//, "");
-  nameEl.textContent = prettifyProfileName(rawName);
+  const displayName = prettifyProfileName(rawName);
+  nameEl.textContent = displayName;
   avatarImg.src = avatarFor(cleanName);
+  rootEl.setAttribute("aria-label", `Change personality. Current: ${displayName}`);
 }
 
 export function showPersonalityBadge() {
