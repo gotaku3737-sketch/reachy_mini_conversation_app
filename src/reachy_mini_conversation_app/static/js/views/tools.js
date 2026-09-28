@@ -68,12 +68,16 @@ function buildToolSpacesSection({ signal, onBeforeChange, onChanged } = {}) {
   });
   const addButton = h("button", { type: "submit", class: "btn btn--primary" }, "Add Space");
 
+  const status = h("p", { id: "tool-space-status", class: "settings-status", role: "status", "aria-live": "polite" });
+
   slugInput.addEventListener("input", () => {
     slugInput.removeAttribute("aria-invalid");
     slugInput.setAttribute("aria-describedby", "tool-space-hint");
+    if (status.classList.contains("is-error")) {
+      status.classList.remove("is-error");
+      status.textContent = "";
+    }
   });
-
-  const status = h("p", { id: "tool-space-status", class: "settings-status", role: "status", "aria-live": "polite" });
   const list = h(
     "div",
     { class: "settings-tool-spaces", role: "list", "aria-live": "polite" },

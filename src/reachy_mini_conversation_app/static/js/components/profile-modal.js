@@ -90,7 +90,10 @@ export function openProfileModal({ mode = "create", initial = {}, signal } = {})
     const errorBox = dialog.querySelector(".modal__error");
     dialog.querySelectorAll("input, textarea").forEach((field) => {
       field.addEventListener("input", () => {
-        errorBox.classList.remove("is-visible");
+        if (errorBox.classList.contains("is-visible")) {
+          errorBox.classList.remove("is-visible");
+          errorBox.textContent = "";
+        }
         field.removeAttribute("aria-invalid");
         // Remove the error box from aria-describedby
         const currentDescribedBy = field.getAttribute("aria-describedby");
