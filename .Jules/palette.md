@@ -7,3 +7,6 @@
 ## 2026-09-27 - Inline Validation Context via aria-invalid and aria-describedby
 **Learning:** Adding a generic status message below a form fails to give screen reader users context about which specific fields were rejected by backend validation.
 **Action:** Always dynamically toggle `aria-invalid="true"` on the offending input fields upon submission failure, and append the error message's ID to the field's `aria-describedby` attribute (e.g. `aria-describedby="hint-id error-id"`). Crucially, bind `input` and `change` event listeners to immediately clean up `aria-invalid`, `aria-describedby`, and the error text as soon as the user starts correcting the fields.
+## 2026-09-28 - Explicitly Clear Error Text on Input Events
+**Learning:** Screen readers may read the text content of error nodes even if visually hidden via CSS classes if they are left in the DOM. Removing visual error classes alone is insufficient.
+**Action:** When clearing form validation errors on `input` or `change` events, ensure that you explicitly clear the text content of the error element (e.g. `errorBox.textContent = ""`) alongside removing visual classes like `is-visible` or `is-error`.
