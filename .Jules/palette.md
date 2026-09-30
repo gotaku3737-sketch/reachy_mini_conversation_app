@@ -10,3 +10,6 @@
 ## 2026-09-28 - Explicitly Clear Error Text on Input Events
 **Learning:** Screen readers may read the text content of error nodes even if visually hidden via CSS classes if they are left in the DOM. Removing visual error classes alone is insufficient.
 **Action:** When clearing form validation errors on `input` or `change` events, ensure that you explicitly clear the text content of the error element (e.g. `errorBox.textContent = ""`) alongside removing visual classes like `is-visible` or `is-error`.
+## 2024-11-13 - Redundant aria-label Overriding Visible Label
+**Learning:** Using an `aria-label` on an input element that is correctly wrapped inside a `<label>` (with visible text) completely overrides the visible text for screen readers, breaking WCAG 2.5.3 (Label in Name). Voice dictation users rely on saying the visible label, and if the accessible name differs (or is completely overridden), dictation fails.
+**Action:** When a form element has a visible label (e.g. wrapped in a `<label>` containing text, or linked via `id` and `for`), avoid adding an `aria-label` that duplicates or overrides that text. Let the element derive its accessible name from the native label instead.
