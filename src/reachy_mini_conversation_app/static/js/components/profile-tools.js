@@ -14,7 +14,6 @@ export function buildProfileToolsSection({ signal, initialProfile = null, onProf
     class: "settings-select",
     name: "profile_tools_profile",
     disabled: "disabled",
-    "aria-label": "Personality to configure",
     "aria-describedby": "profile-tools-intro",
   });
   const summary = h("div", { class: "settings-toolset-summary", "aria-live": "polite" });

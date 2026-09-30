@@ -172,6 +172,7 @@ function buildDialog({ isEdit, initial }) {
           name: "name",
           required: isEdit ? null : "required",
           readonly: isEdit ? "readonly" : null,
+          title: isEdit ? "Personality names cannot be changed after creation." : null,
           autocomplete: "off",
           spellcheck: "false",
           placeholder: "e.g. zen_master",
