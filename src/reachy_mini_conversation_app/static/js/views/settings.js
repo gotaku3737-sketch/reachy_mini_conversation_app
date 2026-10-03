@@ -228,7 +228,7 @@ function buildConnectionSection({ onSaved } = {}) {
 function buildVoiceSection() {
   const select = h(
     "select",
-    { class: "settings-select", name: "voice", disabled: "disabled" },
+    { class: "settings-select", name: "voice", disabled: "disabled", title: "Loading voices…" },
     h("option", { value: "" }, "Loading voices…")
   );
   const status = h("p", { id: "voice-status", class: "settings-status", role: "status", "aria-live": "polite" });
