@@ -14,6 +14,7 @@ export function buildProfileToolsSection({ signal, initialProfile = null, onProf
     class: "settings-select",
     name: "profile_tools_profile",
     disabled: "disabled",
+    title: "Loading tool access…",
     "aria-describedby": "profile-tools-intro",
   });
   const summary = h("div", { class: "settings-toolset-summary", "aria-live": "polite" });
@@ -25,12 +26,12 @@ export function buildProfileToolsSection({ signal, initialProfile = null, onProf
   const status = h("p", { class: "settings-status", role: "status", "aria-live": "polite" });
   const resetButton = h(
     "button",
-    { type: "button", class: "btn btn--ghost", disabled: "disabled", "aria-haspopup": "dialog" },
+    { type: "button", class: "btn btn--ghost", disabled: "disabled", title: "Loading tool access…", "aria-haspopup": "dialog" },
     "Restore defaults"
   );
   const saveButton = h(
     "button",
-    { type: "button", class: "btn btn--primary", disabled: "disabled" },
+    { type: "button", class: "btn btn--primary", disabled: "disabled", title: "Loading tool access…" },
     "Save tool access"
   );
   const element = h(

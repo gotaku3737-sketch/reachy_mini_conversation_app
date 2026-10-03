@@ -13,3 +13,7 @@
 ## 2024-11-13 - Redundant aria-label Overriding Visible Label
 **Learning:** Using an `aria-label` on an input element that is correctly wrapped inside a `<label>` (with visible text) completely overrides the visible text for screen readers, breaking WCAG 2.5.3 (Label in Name). Voice dictation users rely on saying the visible label, and if the accessible name differs (or is completely overridden), dictation fails.
 **Action:** When a form element has a visible label (e.g. wrapped in a `<label>` containing text, or linked via `id` and `for`), avoid adding an `aria-label` that duplicates or overrides that text. Let the element derive its accessible name from the native label instead.
+
+## 2024-05-15 - Missing Initial Tooltips on Disabled Elements
+**Learning:** We dynamically manage tooltips for disabled elements (adding a reason when disabled, removing when enabled), but elements that render in a disabled state immediately on mount (like those waiting for initial async data) were missing their initial `title`. Without this initial tooltip, screen reader and mouse users lack context for why the element is disabled until its state changes.
+**Action:** When a UI component includes elements that are disabled by default (e.g., during an initial fetch), ensure they are instantiated with a `title` attribute explaining the loading/disabled state.
