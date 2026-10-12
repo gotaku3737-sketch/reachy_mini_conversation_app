@@ -15,7 +15,6 @@ export function buildProfileToolsSection({ signal, initialProfile = null, onProf
     name: "profile_tools_profile",
     disabled: "disabled",
     title: "Loading tool access…",
-    "aria-label": "Personality to configure",
     "aria-describedby": "profile-tools-intro",
   });
   const summary = h("div", { class: "settings-toolset-summary", "aria-live": "polite" });
@@ -338,7 +337,6 @@ function toolChoice(tool, checked) {
     type: "checkbox",
     value: tool.id,
     checked: checked ? "checked" : null,
-    "aria-label": `Enable tool: ${prettifyToolName(tool.id)}`,
     "aria-describedby": descId,
   });
   return h(
