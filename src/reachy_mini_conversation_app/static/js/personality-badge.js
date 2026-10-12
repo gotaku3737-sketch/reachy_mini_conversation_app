@@ -29,7 +29,6 @@ export function setPersonality(rawName) {
   const displayName = prettifyProfileName(rawName);
   nameEl.textContent = displayName;
   avatarImg.src = avatarFor(cleanName);
-  rootEl.setAttribute("aria-label", `Change personality. Current: ${displayName}`);
   rootEl.setAttribute("title", `Change personality. Current: ${displayName}`);
 }
 

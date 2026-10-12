@@ -17,3 +17,7 @@
 ## 2024-05-15 - Missing Initial Tooltips on Disabled Elements
 **Learning:** We dynamically manage tooltips for disabled elements (adding a reason when disabled, removing when enabled), but elements that render in a disabled state immediately on mount (like those waiting for initial async data) were missing their initial `title`. Without this initial tooltip, screen reader and mouse users lack context for why the element is disabled until its state changes.
 **Action:** When a UI component includes elements that are disabled by default (e.g., during an initial fetch), ensure they are instantiated with a `title` attribute explaining the loading/disabled state.
+
+## 2026-10-10 - WCAG 2.5.3 Label in Name for Voice Dictation
+**Learning:** Adding an `aria-label` to elements (like buttons or links) that already have visible text can override that text for assistive technologies. This breaks WCAG 2.5.3 (Label in Name), making it impossible for Voice Dictation users to target the element by speaking its visible text, because the accessible name is entirely different.
+**Action:** Never use `aria-label` on an element that has visible, descriptive text content unless it's strictly necessary to append context, and even then, the accessible name must start with the visible text. Rely on the visible text for the accessible name wherever possible.
