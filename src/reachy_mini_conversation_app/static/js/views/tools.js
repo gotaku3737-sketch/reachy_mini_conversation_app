@@ -232,6 +232,7 @@ function buildToolSpacesSection({ signal, onBeforeChange, onChanged } = {}) {
   return {
     element,
     async refresh() {
+      setBusy(true, "Loading Spaces…");
       try {
         const payload = await listToolSpaces();
         if (signal?.aborted) return;
@@ -241,6 +242,8 @@ function buildToolSpacesSection({ signal, onBeforeChange, onChanged } = {}) {
         list.replaceChildren(
           h("p", { class: "settings-status is-error" }, `Could not load Tool Spaces: ${describeError(error)}`)
         );
+      } finally {
+        if (!signal?.aborted) setBusy(false);
       }
     },
   };
