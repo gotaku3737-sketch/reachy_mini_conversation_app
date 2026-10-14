@@ -21,3 +21,6 @@
 ## 2026-10-10 - WCAG 2.5.3 Label in Name for Voice Dictation
 **Learning:** Adding an `aria-label` to elements (like buttons or links) that already have visible text can override that text for assistive technologies. This breaks WCAG 2.5.3 (Label in Name), making it impossible for Voice Dictation users to target the element by speaking its visible text, because the accessible name is entirely different.
 **Action:** Never use `aria-label` on an element that has visible, descriptive text content unless it's strictly necessary to append context, and even then, the accessible name must start with the visible text. Rely on the visible text for the accessible name wherever possible.
+## 2024-10-14 - Missing Loading States for Initial Async Fetches
+**Learning:** When mounting views that immediately perform async data fetching (like listing Tool Spaces), omitting a loading state leaves interactive elements enabled before the data is ready, which can lead to premature interactions or confusion.
+**Action:** Always wrap initial async fetch calls (e.g. inside a `refresh()` or `mount()` function) with explicit loading state toggles (like `setBusy(true)`) and ensure they are cleaned up in a `finally` block.
