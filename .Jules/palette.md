@@ -21,3 +21,6 @@
 ## 2026-10-10 - WCAG 2.5.3 Label in Name for Voice Dictation
 **Learning:** Adding an `aria-label` to elements (like buttons or links) that already have visible text can override that text for assistive technologies. This breaks WCAG 2.5.3 (Label in Name), making it impossible for Voice Dictation users to target the element by speaking its visible text, because the accessible name is entirely different.
 **Action:** Never use `aria-label` on an element that has visible, descriptive text content unless it's strictly necessary to append context, and even then, the accessible name must start with the visible text. Rely on the visible text for the accessible name wherever possible.
+## 2026-10-15 - Dynamic Visible Text vs aria-label (WCAG 2.5.3)
+**Learning:** Using `aria-label` to provide extra context (e.g., "Change personality. Current: X") on a button that already contains visible text ("Personality X") overrides the visible text for assistive technologies. This breaks WCAG 2.5.3 (Label in Name), meaning Voice Dictation users who speak the visible text will fail to activate the button.
+**Action:** When a button's visible text already conveys its purpose and state, rely on the visible text for the accessible name and avoid `aria-label`. Use the `title` attribute to provide tooltips for mouse users without breaking voice control.

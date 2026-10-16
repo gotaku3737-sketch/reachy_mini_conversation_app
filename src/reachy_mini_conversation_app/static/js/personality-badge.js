@@ -30,7 +30,7 @@ export function setPersonality(rawName) {
   nameEl.textContent = displayName;
   avatarImg.src = avatarFor(cleanName);
   rootEl.setAttribute("title", `Change personality. Current: ${displayName}`);
-  rootEl.setAttribute("aria-label", `Change personality. Current: ${displayName}`);
+  rootEl.removeAttribute("aria-label");
 }
 
 export function showPersonalityBadge() {
