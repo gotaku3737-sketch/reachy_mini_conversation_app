@@ -24,3 +24,7 @@
 ## 2026-10-15 - Dynamic Visible Text vs aria-label (WCAG 2.5.3)
 **Learning:** Using `aria-label` to provide extra context (e.g., "Change personality. Current: X") on a button that already contains visible text ("Personality X") overrides the visible text for assistive technologies. This breaks WCAG 2.5.3 (Label in Name), meaning Voice Dictation users who speak the visible text will fail to activate the button.
 **Action:** When a button's visible text already conveys its purpose and state, rely on the visible text for the accessible name and avoid `aria-label`. Use the `title` attribute to provide tooltips for mouse users without breaking voice control.
+
+## 2024-05-18 - Missing Tooltips on Actions
+**Learning:** Icon-only buttons with an `aria-label` for screen readers should also mirror that text in a `title` attribute to provide a visual tooltip for mouse users.
+**Action:** When adding or auditing icon-only buttons, check for a `title` attribute.
