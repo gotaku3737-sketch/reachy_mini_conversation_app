@@ -123,8 +123,18 @@ function buildToolSpacesSection({ signal, onBeforeChange, onChanged } = {}) {
     }
     list.querySelectorAll("button").forEach((button) => {
       button.disabled = nextBusy || !editable;
-      if (reason) button.setAttribute("title", reason);
-      else button.removeAttribute("title");
+      if (reason) {
+        button.setAttribute("title", reason);
+      } else {
+        const titleToRestore = button.getAttribute("aria-describedby")?.startsWith("space-name-")
+          ? `Remove Tool Space ${button.parentElement.querySelector('.settings-tool-space-name').textContent}`
+          : null;
+        if (titleToRestore) {
+          button.setAttribute("title", titleToRestore);
+        } else {
+          button.removeAttribute("title");
+        }
+      }
     });
   }
 
@@ -143,15 +153,18 @@ function buildToolSpacesSection({ signal, onBeforeChange, onChanged } = {}) {
       const toolCount = Number(space.tool_count) || 0;
       const details = [`${toolCount} ${toolCount === 1 ? "tool" : "tools"}`];
       if (space.private) details.push("Private");
+
+      const spaceNameId = `space-name-${space.slug.replace(/[^a-zA-Z0-9-]/g, "-")}`;
+
       const removeButton = h(
         "button",
         {
           type: "button",
           class: "btn btn--ghost",
-          "aria-label": `Remove Tool Space ${space.slug}`,
+          "aria-describedby": spaceNameId,
           "aria-haspopup": "dialog",
           disabled: busy || !editable ? "disabled" : null,
-          title: busy ? "Loading…" : (!editable ? "Tool Space editing is locked by the administrator" : null),
+          title: busy ? "Loading…" : (!editable ? "Tool Space editing is locked by the administrator" : `Remove Tool Space ${space.slug}`),
         },
         "Remove"
       );
@@ -190,7 +203,7 @@ function buildToolSpacesSection({ signal, onBeforeChange, onChanged } = {}) {
           h(
             "div",
             { class: "settings-tool-space-summary" },
-            h("strong", { class: "settings-tool-space-name" }, space.slug),
+            h("strong", { id: spaceNameId, class: "settings-tool-space-name" }, space.slug),
             h("span", { class: "settings-tool-space-meta" }, details.join(" · "))
           ),
           removeButton

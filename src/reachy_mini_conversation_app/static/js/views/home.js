@@ -206,6 +206,7 @@ export async function mountHomeView({ outlet, signal, navigate }) {
 
 function buildPersonalityCard({ name, isActive, disabled, onSelect, onManageTools, onEdit, onDelete }) {
   const hasAvatar = Object.prototype.hasOwnProperty.call(AVATAR_BY_PROFILE, stripUserPrefix(name));
+  const cardNameId = `personality-name-${stripUserPrefix(name).replace(/[^a-zA-Z0-9-]/g, "-")}`;
   const card = h(
     "button",
     {
@@ -228,7 +229,7 @@ function buildPersonalityCard({ name, isActive, disabled, onSelect, onManageTool
         class: !hasAvatar ? "personality-card__avatar--fallback" : null,
       })
     ),
-    h("span", { class: "personality-card__name" }, prettifyProfileName(name)),
+    h("span", { id: cardNameId, class: "personality-card__name" }, prettifyProfileName(name)),
     isActive && checkBadge()
   );
   // Wrap so the edit/delete buttons are siblings, not nested <button>s inside the card button.
@@ -247,7 +248,8 @@ function buildPersonalityCard({ name, isActive, disabled, onSelect, onManageTool
         {
           type: "button",
           class: "personality-card__tools",
-          "aria-label": `Manage tools for ${prettifyProfileName(name)}`,
+          "aria-describedby": cardNameId,
+          title: `Manage tools for ${prettifyProfileName(name)}`,
           onClick: onManageTools,
         },
         "Manage tools"
