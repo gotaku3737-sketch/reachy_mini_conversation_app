@@ -248,6 +248,7 @@ function buildPersonalityCard({ name, isActive, disabled, onSelect, onManageTool
           type: "button",
           class: "personality-card__tools",
           "aria-label": `Manage tools for ${prettifyProfileName(name)}`,
+          title: `Manage tools for ${prettifyProfileName(name)}`,
           onClick: onManageTools,
         },
         "Manage tools"
