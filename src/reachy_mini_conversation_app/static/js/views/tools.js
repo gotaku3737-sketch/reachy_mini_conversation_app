@@ -151,7 +151,7 @@ function buildToolSpacesSection({ signal, onBeforeChange, onChanged } = {}) {
           "aria-label": `Remove Tool Space ${space.slug}`,
           "aria-haspopup": "dialog",
           disabled: busy || !editable ? "disabled" : null,
-          title: busy ? "Loading…" : (!editable ? "Tool Space editing is locked by the administrator" : null),
+          title: busy ? "Loading…" : (!editable ? "Tool Space editing is locked by the administrator" : `Remove Tool Space ${space.slug}`),
         },
         "Remove"
       );
