@@ -28,6 +28,6 @@
 ## 2024-05-18 - Missing Tooltips on Actions
 **Learning:** Icon-only buttons with an `aria-label` for screen readers should also mirror that text in a `title` attribute to provide a visual tooltip for mouse users.
 **Action:** When adding or auditing icon-only buttons, check for a `title` attribute.
-## 2025-02-28 - WCAG 2.5.3 (Label in Name) on Dynamic UI Buttons
-**Learning:** Adding an `aria-label` to a button that already contains visible text that accurately describes its purpose violates WCAG 2.5.3 (Label in Name), which can break voice dictation software because the accessible name diverges from the visual text. Providing dynamic contexts (e.g. referencing a target name) is better accomplished with `aria-describedby` pointing to the ID of the target element containing the visible name.
-**Action:** When buttons like "Remove" or "Manage tools" need extra context, never override the visible text with `aria-label`. Rely on the visible text for the accessible name, and associate the target name via `aria-describedby` instead. Combine this with the `title` attribute to provide tooltips for mouse users.
+## 2026-10-24 - Preserving Accessible Names with title Tooltips
+**Learning:** When trying to add visual tooltips to buttons via the `title` attribute, removing the `aria-label` can cause a severe accessibility regression. For buttons with generic visible text (like "Manage tools" or "Remove"), the `aria-label` provides essential context to screen reader users navigating out of context.
+**Action:** When adding supplementary `title` tooltips for mouse users, ensure the existing `aria-label` remains intact to preserve context for assistive technologies. Additionally, ensure the `aria-label` always *starts* with the visible text to comply with WCAG 2.5.3 (Label in Name), which avoids breaking voice control tools.
