@@ -316,6 +316,8 @@ function buildVoiceSection() {
       }
       select.disabled = false;
       submitButton.disabled = false;
+      select.removeAttribute("title");
+      submitButton.removeAttribute("title");
       status.textContent = "";
     },
   };
