@@ -31,3 +31,7 @@
 ## 2026-10-24 - Preserving Accessible Names with title Tooltips
 **Learning:** When trying to add visual tooltips to buttons via the `title` attribute, removing the `aria-label` can cause a severe accessibility regression. For buttons with generic visible text (like "Manage tools" or "Remove"), the `aria-label` provides essential context to screen reader users navigating out of context.
 **Action:** When adding supplementary `title` tooltips for mouse users, ensure the existing `aria-label` remains intact to preserve context for assistive technologies. Additionally, ensure the `aria-label` always *starts* with the visible text to comply with WCAG 2.5.3 (Label in Name), which avoids breaking voice control tools.
+
+## 2026-10-27 - Restore Original Tooltips when Clearing Disabled States
+**Learning:** When an element is disabled and its `title` is temporarily overridden to explain the disabled state (e.g., 'Loading...'), unconditionally calling `removeAttribute('title')` when re-enabling it will permanently destroy any static tooltip it previously had (like those required for icon-only buttons). This hurts mouse users.
+**Action:** When bulk-clearing disabled reasons, check if the element has an `aria-label` (or data attribute storing the original title) and restore that as the `title` instead of unconditionally removing it.
