@@ -31,3 +31,7 @@
 ## 2026-10-24 - Preserving Accessible Names with title Tooltips
 **Learning:** When trying to add visual tooltips to buttons via the `title` attribute, removing the `aria-label` can cause a severe accessibility regression. For buttons with generic visible text (like "Manage tools" or "Remove"), the `aria-label` provides essential context to screen reader users navigating out of context.
 **Action:** When adding supplementary `title` tooltips for mouse users, ensure the existing `aria-label` remains intact to preserve context for assistive technologies. Additionally, ensure the `aria-label` always *starts* with the visible text to comply with WCAG 2.5.3 (Label in Name), which avoids breaking voice control tools.
+
+## 2024-10-29 - Preserving static tooltips during dynamic state changes
+**Learning:** In vanilla JavaScript, dynamically disabling elements and setting their `title` attribute to explain why (e.g. "Loading..." or "Locked") is good UX. However, unconditionally calling `removeAttribute('title')` when the element is re-enabled permanently destroys the original, static tooltip (which is essential for icon-only buttons like "Remove Tool Space").
+**Action:** When clearing dynamic tooltips on elements that have static tooltips, always restore the original tooltip instead of fully removing the attribute. Use `button.getAttribute("aria-label")` (or a `data-` attribute if the original wasn't an aria-label) as the source of truth to restore the initial `title`.
