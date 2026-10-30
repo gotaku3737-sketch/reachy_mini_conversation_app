@@ -123,8 +123,16 @@ function buildToolSpacesSection({ signal, onBeforeChange, onChanged } = {}) {
     }
     list.querySelectorAll("button").forEach((button) => {
       button.disabled = nextBusy || !editable;
-      if (reason) button.setAttribute("title", reason);
-      else button.removeAttribute("title");
+      if (reason) {
+        button.setAttribute("title", reason);
+      } else {
+        const originalTitle = button.getAttribute("aria-label");
+        if (originalTitle) {
+          button.setAttribute("title", originalTitle);
+        } else {
+          button.removeAttribute("title");
+        }
+      }
     });
   }
 
